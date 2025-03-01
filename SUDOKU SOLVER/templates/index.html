@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Sudoku Solver-> </h1>
+    <form method="POST">
+        <table>
+            {% for i in range(9) %}
+                <tr>
+                    {% for j in range(9) %}
+                        <td>
+                            <input type="number" name="row{{ i }}_{{ j }}" min="0" max="9" value="{{ solved[i][j] if solved else '' }}" />
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Solve</button>
+    </form>
+
+    {% if solved %}
+        <h2>Solved Sudoku:</h2>
+        <table class="solved-table ">
+            {% for row in solved %}
+                <tr>
+                    {% for num in row %}
+                        <td>{{ num }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
